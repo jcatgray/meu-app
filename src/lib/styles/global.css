@@ -1,0 +1,69 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Estilos globais */
+html,
+body {
+  height: 100%;
+  background-color: #353535;
+  color: #ffffff;
+  font-family: "Roboto", sans-serif;
+  font-size: 19px;
+}
+
+/* Classes utilitárias globais */
+.text-error {
+  color: #ff0000;
+}
+
+/* Container principal da aplicação */
+#app {
+  min-height: 100vh;
+  background-color: #000000;
+}
+
+/* Estilos para melhor contraste no fundo preto */
+a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #cccccc;
+}
+
+/* Botões com melhor visibilidade */
+button {
+  margin-top: 1rem;
+  background-color: #1976d2;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+}
+
+button:hover {
+  background-color: #002d80;
+}
+
+/* Inputs com melhor visibilidade */
+input,
+textarea,
+select {
+  background-color: #222222;
+  color: #ffffff;
+  border: 1px solid #555555;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: #777777;
+}
