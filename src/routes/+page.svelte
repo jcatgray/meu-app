@@ -28,10 +28,6 @@
 <h1>Menu Aplicação</h1>
 
 <div>
-  teste
-</div>
-
-<div>
 	<button on:click={handleSuccess}>Sucesso</button>
 	<button on:click={handleError}>Erro</button>
 	<button on:click={handleWarning}>Aviso</button>
