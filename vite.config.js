@@ -6,14 +6,12 @@ export default defineConfig({
   plugins: [
     sveltekit(),
     VitePWA({
-      registerType: "autoUpdate", // Mantém a atualização automática do service worker
+      registerType: "autoUpdate",
+      injectRegister: "auto",
       workbox: {
-        // Define os arquivos a serem armazenados em cache
-        globPatterns: ["**/*.{js,css,html,ico,png,svg}"],
-        // Configura a estratégia Cache First para os recursos
+        globPatterns: ["**/*.{js,css,html,ico,png,svg,woff2}"],
         runtimeCaching: [
           {
-            // Cache para recursos estáticos (JS, CSS, imagens, etc.)
             urlPattern: ({ request }) =>
               request.destination === "script" ||
               request.destination === "style" ||
@@ -22,37 +20,42 @@ export default defineConfig({
             options: {
               cacheName: "static-resources",
               expiration: {
-                maxEntries: 100, // Limite de itens no cache
-                maxAgeSeconds: 30 * 24 * 60 * 60, // 30 dias
+                maxEntries: 100,
+                maxAgeSeconds: 60 * 60 * 24 * 30, // 30 dias
+              },
+              cacheableResponse: {
+                statuses: [0, 200],
               },
             },
           },
           {
-            // Cache para páginas HTML (Cache First com fallback para rede)
             urlPattern: ({ request }) => request.destination === "document",
-            handler: "CacheFirst",
+            handler: "NetworkFirst",
             options: {
               cacheName: "html-pages",
+              networkTimeoutSeconds: 5,
               expiration: {
                 maxEntries: 50,
-                maxAgeSeconds: 30 * 24 * 60 * 60, // 30 dias
+                maxAgeSeconds: 60 * 60 * 24 * 30,
               },
             },
           },
           {
-            // Cache para APIs ou outros recursos dinâmicos (opcional, se você tiver APIs)
             urlPattern: ({ url }) => url.pathname.startsWith("/api/"),
-            handler: "NetworkFirst", // Prioriza a rede para APIs, com cache como fallback
+            handler: "NetworkFirst",
             options: {
               cacheName: "api-cache",
-              networkTimeoutSeconds: 10, // Timeout de 10 segundos antes de usar o cache
+              networkTimeoutSeconds: 10,
               expiration: {
                 maxEntries: 50,
-                maxAgeSeconds: 24 * 60 * 60, // 1 dia
+                maxAgeSeconds: 60 * 60 * 24,
               },
             },
           },
         ],
+        cleanupOutdatedCaches: true,
+        skipWaiting: true,
+        clientsClaim: true,
       },
       manifest: {
         name: "Meu App",
@@ -61,26 +64,38 @@ export default defineConfig({
         theme_color: "#ffffff",
         background_color: "#ffffff",
         display: "standalone",
+        orientation: "portrait",
         start_url: "/",
         scope: "/",
         icons: [
           {
-            src: "android-chrome-192x192.png",
+            src: "/android-chrome-192x192.png",
             sizes: "192x192",
             type: "image/png",
           },
           {
-            src: "android-chrome-512x512.png",
+            src: "/android-chrome-512x512.png",
             sizes: "512x512",
             type: "image/png",
           },
           {
-            src: "android-chrome-192x192.png",
+            src: "/android-chrome-192x192.png",
             sizes: "192x192",
             type: "image/png",
-            purpose: "maskable", // Ícone adaptável para Android
+            purpose: "maskable",
+          },
+          {
+            src: "/apple-touch-icon.png",
+            sizes: "180x180",
+            type: "image/png",
+            purpose: "any",
           },
         ],
+      },
+      devOptions: {
+        enabled: false,
+        type: "module",
+        navigateFallback: "/",
       },
     }),
   ],
