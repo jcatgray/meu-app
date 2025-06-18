@@ -36,18 +36,37 @@ a:hover {
   color: #cccccc;
 }
 
-/* Botões com melhor visibilidade */
+.menu-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh; /* Garante que o contêiner ocupe a altura total da tela */
+  text-align: center;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* Espaçamento entre os botões */
+  width: 100%;
+  max-width: 300px; /* Limita a largura máxima dos botões */
+}
+
 button {
-  margin-top: 1rem;
-  background-color: #1976d2;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
+  width: 100%; /* Faz todos os botões terem a mesma largura */
+  padding: 0.75rem; /* Padding uniforme */
+  font-size: 1rem; /* Tamanho de fonte consistente */
+  color: #ffffff;
+  border: 1px solid #777777; /* Estilo opcional */
+  border-radius: 4px; /* Bordas arredondadas */
+  background-color: #3d89d1; /* Cor de fundo opcional */
+  cursor: pointer;
+  transition: background-color 0.2s; /* Transição suave */
 }
 
 button:hover {
-  background-color: #002d80;
+  background-color: #0264b4; /* Efeito hover opcional */
 }
 
 /* Inputs com melhor visibilidade */

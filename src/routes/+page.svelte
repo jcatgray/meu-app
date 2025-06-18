@@ -23,15 +23,22 @@
 			autoCloseDelay: 2000 
 		});
 	}
+
 </script>
 
-<h1>Menu Aplicação</h1>
 
-<div>
-	<button on:click={handleSuccess}>Sucesso</button>
-	<button on:click={handleError}>Erro</button>
-	<button on:click={handleWarning}>Aviso</button>
-	<button on:click={handleInfo}>Info</button>
-	<button on:click={handleAutoClose}>Auto Close</button>
+<div class="menu-container">
+  <h3>Menu Aplicação</h3>
+	<br />
+
+  <div class="button-container">
+    <button on:click={handleSuccess}>Sucesso</button>
+    <button on:click={handleError}>Erro</button>
+    <button on:click={handleWarning}>Aviso</button>
+    <button on:click={handleInfo}>Info</button>
+    <button on:click={handleAutoClose}>Auto Close</button>
+  </div>
+
+  <br />
+  <h6>versao-1</h6>
 </div>
-
