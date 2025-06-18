@@ -63,7 +63,7 @@ export default defineConfig({
         description: "Meu App PWA",
         theme_color: "#ffffff",
         background_color: "#ffffff",
-        display: "standalone",
+        display: "fullscreen",
         orientation: "portrait",
         start_url: "/",
         scope: "/",
