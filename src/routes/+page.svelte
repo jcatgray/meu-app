@@ -8,12 +8,21 @@
 	import { alertSoundBase64 } from "$lib/audio/sound";
 	import { toast } from "@zerodevx/svelte-toast";
 
+	// Criar instância de Audio apenas no lado do cliente
+	let audio;
+	if (typeof window !== "undefined") {
+		audio = new Audio(alertSoundBase64);
+	}
+
 	function handleSuccess() {
 		showSuccess("Sucesso", "Operação realizada com sucesso!!");
 	}
 
 	function handleError() {
-		showError("Erro","Não foi possivel alocar material no endereço 93-E-FE. Tente outro endereço!!");
+		showError(
+			"Erro",
+			"Não foi possivel alocar material no endereço 93-E-FE. Tente outro endereço!!",
+		);
 	}
 
 	function handleWarning() {
@@ -30,22 +39,21 @@
 			autoCloseDelay: 2000,
 		});
 	}
-
-	function playSound() {
-		const audio = new Audio(alertSoundBase64);
-		audio
-			.play()
-			.catch((error) => console.error("Erro ao tocar o áudio:", error));
+	function alertSound() {
+		// Reutiliza a instância existente
+		audio.currentTime = 0; // Reinicia o áudio
+		audio.play().catch((error) => alert("Erro ao tocar o áudio:"));
 	}
 
 	function pushError() {
-		const audio = new Audio(alertSoundBase64);
-		audio
-			.play()
-			.catch((error) => console.error("Erro ao tocar o áudio:", error));
-		toast.push("Ocorreu um erro!", {
-			theme: { "--toastBackground": "#ff4d4d" },
-			duration: 3000,
+		alertSound();
+
+		toast.push("teste de notificacao push , 123 123 123", {
+			theme: {
+				"--toastBackground": "#00962b",
+				"--toastBarBackground": "green",
+			},
+			duration: 5000,
 		});
 	}
 </script>
@@ -60,7 +68,7 @@
 		<button on:click={handleWarning}>Aviso</button>
 		<button on:click={handleInfo}>Info</button>
 		<button on:click={handleAutoClose}>Auto Close</button>
-		<button on:click={playSound}>Tocar Alerta</button>
+		<button on:click={alertSound}>Tocar Alerta</button>
 		<button on:click={pushError}>Notificação push</button>
 	</div>
 
