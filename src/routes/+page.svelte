@@ -31,25 +31,29 @@
 			autoCloseDelay: 2000,
 		});
 	}
+	import { alertSoundBase64 } from "$lib/audio/sound";
 
-	function exitFullscreen() {
-		if (document.fullscreenElement) {
-			document.exitFullscreen();
-		}
+	function playSound() {
+		const audio = new Audio(alertSoundBase64);
+		audio
+			.play()
+			.catch((error) => console.error("Erro ao tocar o áudio:", error));
 	}
 </script>
+
 <div class="menu-container">
 	<h3>Menu Aplicação</h3>
 	<br />
+
 	<div class="button-container">
 		<button on:click={handleSuccess}>Sucesso</button>
 		<button on:click={handleError}>Erro</button>
 		<button on:click={handleWarning}>Aviso</button>
 		<button on:click={handleInfo}>Info</button>
 		<button on:click={handleAutoClose}>Auto Close</button>
-		<button on:click={exitFullscreen}>Sair do Fullscreen</button>
+		<button on:click={playSound}>Tocar Alerta</button>
 	</div>
 
 	<br />
-	<h6>versao-1.0002</h6>
+	<h6>versao-1.0001</h6>
 </div>
