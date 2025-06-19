@@ -1,9 +1,11 @@
 <script>
   import '$lib/styles/global.css'; // Caminho absoluto recomendado
   import GlobalAlert from '$lib/components/GlobalAlert.svelte';
+  import { SvelteToast } from '@zerodevx/svelte-toast';
 </script>
 
-<main>
+<SvelteToast />
+<main>  
   <slot />
 </main>
 

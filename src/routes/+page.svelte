@@ -5,16 +5,15 @@
 		showWarning,
 		showInfo,
 	} from "$lib/stores/alert";
+	import { alertSoundBase64 } from "$lib/audio/sound";
+	import { toast } from "@zerodevx/svelte-toast";
 
 	function handleSuccess() {
 		showSuccess("Sucesso", "Operação realizada com sucesso!!");
 	}
 
 	function handleError() {
-		showError(
-			"Erro",
-			"Não foi possivel alocar material no endereço 93-E-FE. Tente outro endereço!!",
-		);
+		showError("Erro","Não foi possivel alocar material no endereço 93-E-FE. Tente outro endereço!!");
 	}
 
 	function handleWarning() {
@@ -31,13 +30,23 @@
 			autoCloseDelay: 2000,
 		});
 	}
-	import { alertSoundBase64 } from "$lib/audio/sound";
 
 	function playSound() {
 		const audio = new Audio(alertSoundBase64);
 		audio
 			.play()
 			.catch((error) => console.error("Erro ao tocar o áudio:", error));
+	}
+
+	function pushError() {
+		const audio = new Audio(alertSoundBase64);
+		audio
+			.play()
+			.catch((error) => console.error("Erro ao tocar o áudio:", error));
+		toast.push("Ocorreu um erro!", {
+			theme: { "--toastBackground": "#ff4d4d" },
+			duration: 3000,
+		});
 	}
 </script>
 
@@ -52,8 +61,9 @@
 		<button on:click={handleInfo}>Info</button>
 		<button on:click={handleAutoClose}>Auto Close</button>
 		<button on:click={playSound}>Tocar Alerta</button>
+		<button on:click={pushError}>Notificação push</button>
 	</div>
 
 	<br />
-	<h6>versao-1.0001</h6>
+	<h6>versao-1.0003</h6>
 </div>

@@ -22,6 +22,7 @@
 		"vite-plugin-pwa": "^1.0.0"
 	},
 	"dependencies": {
-		"@material/web": "^2.3.0"
+		"@material/web": "^2.3.0",
+		"@zerodevx/svelte-toast": "^0.9.6"
 	}
 }
