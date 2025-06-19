@@ -1,44 +1,55 @@
 <script>
-	import { showSuccess, showError, showWarning, showInfo } from '$lib/stores/alert';
-	
+	import {
+		showSuccess,
+		showError,
+		showWarning,
+		showInfo,
+	} from "$lib/stores/alert";
+
 	function handleSuccess() {
 		showSuccess("Sucesso", "Operação realizada com sucesso!!");
 	}
-	
+
 	function handleError() {
-		showError("Erro", "Não foi possivel alocar material no endereço 93-E-FE. Tente outro endereço!!");
+		showError(
+			"Erro",
+			"Não foi possivel alocar material no endereço 93-E-FE. Tente outro endereço!!",
+		);
 	}
-	
+
 	function handleWarning() {
 		showWarning("Aviso", "Código deve ser informado!!");
 	}
-	
+
 	function handleInfo() {
 		showInfo("Informação", "Esta é uma mensagem informativa");
 	}
-	
+
 	function handleAutoClose() {
-		showSuccess("Auto Close", "Este alerta fechará automaticamente", { 
-			autoClose: true, 
-			autoCloseDelay: 2000 
+		showSuccess("Auto Close", "Este alerta fechará automaticamente", {
+			autoClose: true,
+			autoCloseDelay: 2000,
 		});
 	}
 
+	function exitFullscreen() {
+		if (document.fullscreenElement) {
+			document.exitFullscreen();
+		}
+	}
 </script>
-
-
 <div class="menu-container">
-  <h3>Menu Aplicação</h3>
+	<h3>Menu Aplicação</h3>
 	<br />
+	<div class="button-container">
+		<button on:click={handleSuccess}>Sucesso</button>
+		<button on:click={handleError}>Erro</button>
+		<button on:click={handleWarning}>Aviso</button>
+		<button on:click={handleInfo}>Info</button>
+		<button on:click={handleAutoClose}>Auto Close</button>
+		<button on:click={exitFullscreen}>Sair do Fullscreen</button>
+	</div>
 
-  <div class="button-container">
-    <button on:click={handleSuccess}>Sucesso</button>
-    <button on:click={handleError}>Erro</button>
-    <button on:click={handleWarning}>Aviso</button>
-    <button on:click={handleInfo}>Info</button>
-    <button on:click={handleAutoClose}>Auto Close</button>
-  </div>
-
-  <br />
-  <h6>versao-1.0001</h6>
+	<br />
+	<h6>versao-1.0002</h6>
 </div>
