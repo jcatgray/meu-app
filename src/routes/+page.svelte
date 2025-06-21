@@ -61,7 +61,6 @@
 <div class="menu-container">
 	<h3>Menu Aplicação</h3>
 	<br />
-
 	<div class="button-container">
 		<button on:click={handleSuccess}>Sucesso</button>
 		<button on:click={handleError}>Erro</button>

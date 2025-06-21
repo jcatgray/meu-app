@@ -9,9 +9,15 @@ export default defineConfig({
       registerType: "autoUpdate",
       injectRegister: "auto",
       workbox: {
-        globPatterns: ["**/*.{js,css,html,ico,png,svg}"],
+        globPatterns: ["**/*.{js,css,html,ico,png,svg,woff2,ttf,json}"],
+        cleanupOutdatedCaches: true,
+        skipWaiting: true,
+        clientsClaim: true,
+        navigateFallback: "/", // serve '/' para qualquer rota em SPA
+
         runtimeCaching: [
           {
+            // JS, CSS, imagens: CacheFirst
             urlPattern: ({ request }) =>
               request.destination === "script" ||
               request.destination === "style" ||
@@ -29,8 +35,9 @@ export default defineConfig({
             },
           },
           {
+            // HTML Pages (rotas SvelteKit): NetworkFirst
             urlPattern: ({ request }) => request.destination === "document",
-            handler: "CacheFirst",
+            handler: "NetworkFirst",
             options: {
               cacheName: "html-pages",
               networkTimeoutSeconds: 5,
@@ -41,8 +48,9 @@ export default defineConfig({
             },
           },
           {
+            // API: NetworkFirst
             urlPattern: ({ url }) => url.pathname.startsWith("/api/"),
-            handler: "CacheFirst",
+            handler: "NetworkFirst",
             options: {
               cacheName: "api-cache",
               networkTimeoutSeconds: 10,
@@ -53,17 +61,15 @@ export default defineConfig({
             },
           },
         ],
-        cleanupOutdatedCaches: true,
-        skipWaiting: true,
-        clientsClaim: true,
       },
+
       manifest: {
         name: "Meu App",
         short_name: "MeuApp",
         description: "Meu App PWA",
         theme_color: "#ffffff",
         background_color: "#ffffff",
-        display: "fullscreen",
+        display: "standalone", // ou fullscreen
         orientation: "portrait",
         start_url: "/",
         scope: "/",
@@ -88,14 +94,13 @@ export default defineConfig({
             src: "/apple-touch-icon.png",
             sizes: "180x180",
             type: "image/png",
-            purpose: "any",
           },
         ],
       },
+
       devOptions: {
-        enabled: false,
+        enabled: false, // true apenas se quiser testar no dev
         type: "module",
-        navigateFallback: "/",
       },
     }),
   ],
