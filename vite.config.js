@@ -13,11 +13,10 @@ export default defineConfig({
         cleanupOutdatedCaches: true,
         skipWaiting: true,
         clientsClaim: true,
-        navigateFallback: "/", // serve '/' para qualquer rota em SPA
-
+        navigateFallback: "/",
+        navigateFallbackDenylist: [/^\/api\//],
         runtimeCaching: [
           {
-            // JS, CSS, imagens: CacheFirst
             urlPattern: ({ request }) =>
               request.destination === "script" ||
               request.destination === "style" ||
@@ -27,7 +26,7 @@ export default defineConfig({
               cacheName: "static-resources",
               expiration: {
                 maxEntries: 100,
-                maxAgeSeconds: 60 * 60 * 24 * 30, // 30 dias
+                maxAgeSeconds: 60 * 60 * 24 * 30,
               },
               cacheableResponse: {
                 statuses: [0, 200],
@@ -35,12 +34,10 @@ export default defineConfig({
             },
           },
           {
-            // HTML Pages (rotas SvelteKit): NetworkFirst
             urlPattern: ({ request }) => request.destination === "document",
-            handler: "NetworkFirst",
+            handler: "CacheFirst", // Alterado para CacheFirst
             options: {
               cacheName: "html-pages",
-              networkTimeoutSeconds: 5,
               expiration: {
                 maxEntries: 50,
                 maxAgeSeconds: 60 * 60 * 24 * 30,
@@ -48,7 +45,6 @@ export default defineConfig({
             },
           },
           {
-            // API: NetworkFirst
             urlPattern: ({ url }) => url.pathname.startsWith("/api/"),
             handler: "NetworkFirst",
             options: {
@@ -62,14 +58,13 @@ export default defineConfig({
           },
         ],
       },
-
       manifest: {
         name: "Meu App",
         short_name: "MeuApp",
         description: "Meu App PWA",
         theme_color: "#ffffff",
         background_color: "#ffffff",
-        display: "standalone", // ou fullscreen
+        display: "standalone",
         orientation: "portrait",
         start_url: "/",
         scope: "/",
@@ -97,10 +92,8 @@ export default defineConfig({
           },
         ],
       },
-
       devOptions: {
-        enabled: false, // true apenas se quiser testar no dev
-        type: "module",
+        enabled: false,
       },
     }),
   ],
