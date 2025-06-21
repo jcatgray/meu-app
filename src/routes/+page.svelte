@@ -53,7 +53,7 @@
 				"--toastBackground": "#00962b",
 				"--toastBarBackground": "green",
 			},
-			duration: 5000,
+			duration: 3500,
 		});
 	}
 </script>
@@ -73,5 +73,5 @@
 	</div>
 
 	<br />
-	<h6>versao-1.0003</h6>
+	<h6>versao-1.0004</h6>
 </div>

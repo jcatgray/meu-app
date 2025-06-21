@@ -9,7 +9,7 @@ export default defineConfig({
       registerType: "autoUpdate",
       injectRegister: "auto",
       workbox: {
-        globPatterns: ["**/*.{js,css,html,ico,png,svg,woff2}"],
+        globPatterns: ["**/*.{js,css,html,ico,png,svg}"],
         runtimeCaching: [
           {
             urlPattern: ({ request }) =>
@@ -30,7 +30,7 @@ export default defineConfig({
           },
           {
             urlPattern: ({ request }) => request.destination === "document",
-            handler: "NetworkFirst",
+            handler: "CacheFirst",
             options: {
               cacheName: "html-pages",
               networkTimeoutSeconds: 5,
@@ -42,7 +42,7 @@ export default defineConfig({
           },
           {
             urlPattern: ({ url }) => url.pathname.startsWith("/api/"),
-            handler: "NetworkFirst",
+            handler: "CacheFirst",
             options: {
               cacheName: "api-cache",
               networkTimeoutSeconds: 10,
