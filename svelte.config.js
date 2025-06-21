@@ -8,9 +8,6 @@ const config = {
       assets: "build",
       fallback: "index.html", // IMPORTANTE para funcionar offline como SPA
     }),
-    prerender: {
-      default: true,
-    },
   },
 };
 
