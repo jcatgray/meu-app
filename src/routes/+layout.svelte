@@ -1,16 +1,17 @@
 <script>
-  import '$lib/styles/global.css'; // Caminho absoluto recomendado
-  import GlobalAlert from '$lib/components/GlobalAlert.svelte';
-  import { SvelteToast } from '@zerodevx/svelte-toast';
+  import "$lib/styles/global.css"; // Caminho absoluto recomendado
+  import GlobalAlert from "$lib/components/GlobalAlert.svelte";
+  import { SvelteToast } from "@zerodevx/svelte-toast";
 </script>
-
-<SvelteToast />
-<main>  
-  <slot />
-</main>
 
 <!-- Componente de alerta global -->
 <GlobalAlert />
+
+<SvelteToast />
+
+<main>
+  <slot />
+</main>
 
 <style>
   main {

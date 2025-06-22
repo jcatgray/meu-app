@@ -8,6 +8,7 @@
 
   import { audioStore } from "$lib/stores/audioStore";
   import { toast } from "@zerodevx/svelte-toast";
+
   //-----------------------------------------------------------------------------------------------
 
   function handleSuccess() {
@@ -17,7 +18,7 @@
   function handleError() {
     showError(
       "Erro",
-      "Não foi possivel alocar material no endereço 93-E-FE. Tente outro endereço!!"
+      "Não foi possivel alocar material no endereço 93-E-FE. Tente outro endereço!!",
     );
   }
 
@@ -42,12 +43,13 @@
       return store;
     });
 
-    toast.push("teste de notificacao push , 123 123 123", {
+    toast.push("Hide the progress bar", {
       theme: {
-        "--toastBackground": "#00962b",
         "--toastBarHeight": 0,
+        "--toastBackground": "green",
       },
-      duration: 2500,
+      duration: 2000,
+      intro: { x: 12 },
     });
   }
 </script>
